@@ -4,12 +4,14 @@ RUN mkdir -v /painkeep && \
     useradd -u 2001 -M -s /bin/false painkeep && \
     chmod -v +x /usr/bin/mvdsv
 
+# hadolint ignore=DL3008, DL3015
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
         libcurl4-openssl-dev && \
     apt-get autoremove -y && \
-    apt-get clean
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 VOLUME /painkeep
 WORKDIR /painkeep
