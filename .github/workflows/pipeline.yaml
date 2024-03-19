@@ -8,3 +8,11 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: Dockerfile
+  google auth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          project_id: painkeep
+          workload_identity_provider: 'projects/708075820142/locations/global/workloadIdentityPools/github/providers/my-repo'
