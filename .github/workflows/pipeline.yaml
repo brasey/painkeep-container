@@ -8,7 +8,7 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: Dockerfile
-  google auth:
+  google-auth:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
