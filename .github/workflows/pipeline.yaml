@@ -26,5 +26,5 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          push: false
+          push: true
           tags: gcr.io/painkeep/painkeep:mvdsv-1.00
