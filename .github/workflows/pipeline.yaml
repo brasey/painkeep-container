@@ -8,7 +8,7 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: Dockerfile
-  google-auth:
+  docker:
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
@@ -19,3 +19,12 @@ jobs:
         with:
           project_id: painkeep
           workload_identity_provider: 'projects/708075820142/locations/global/workloadIdentityPools/github/providers/my-repo'
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action:@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action:@v3
+      - name: Build and push
+        uses: docker/build-push-action:@v5
+        with:
+          push: false
+          tags: gcr.io/painkeep/painkeep:mvdsv-1.00
