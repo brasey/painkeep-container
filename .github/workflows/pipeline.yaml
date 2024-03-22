@@ -11,14 +11,21 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: read
+      id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: google-github-actions/auth@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Google auth
+        uses: google-github-actions/auth@v2
         with:
           project_id: painkeep
-          workload_identity_provider: 'projects/708075820142/locations/global/workloadIdentityPools/github/providers/my-repo'
+          workload_identity_provider: ${{secrets.WIF_PROVIDER}}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+      - name: Docker auth
+        run: |-
+          gcloud auth configure-docker us-east1-docker.pkg.dev
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
